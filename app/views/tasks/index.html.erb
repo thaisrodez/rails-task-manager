@@ -1,7 +1,19 @@
+<div class="container">
 <h1>My tasks</h1>
-<ol>
+<ul>
 <% @tasks.each do |task| %>
-  <li><%= link_to task.title, task_path(task.id) %> | <%= link_to 'Delete', task_path(task.id), method: "delete", data: {confirm: "Delete #{task.title}?"} %></li>
+  <li> <% if task.completed %>
+   <%= icon('far', 'check-square') %>
+   <% else %>
+   <%= icon('far', 'square') %>
+   <% end %>
+  <%= link_to task.title, task_path(task.id) %> •
+  <%= link_to icon('far', 'trash-alt'), task_path(task.id), method: "delete", data: {confirm: "Delete #{task.title}?"} %></li>
 <% end %>
-</ol>
-<%= link_to "Add task", tasks_new_path %>
+</ul>
+<hr>
+<%= link_to new_task_path do %>
+<%= icon('fas', 'plus') %> Add task
+<% end %>
+
+</div>
